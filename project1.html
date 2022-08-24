@@ -1,0 +1,124 @@
+    <html>
+    <head>
+        <title>game</title>
+    </head>
+        <style type="text/css">
+                .area {
+                background-color: #0000FF;
+                }
+    #StartButton {
+    width: 300px; 
+    height: 100px; 
+    position: absolute; 
+    top: 300px;
+    left:600px;
+    }
+    #ShowLog {
+    margin-left: 1310px;
+    margin-top: -40px;
+    }
+    
+    
+    
+        </style>
+    <body>
+    
+    
+    
+    <div id="SplashScreen">
+    <h1><center>Sky's First Game</center></h1>
+    <p><center>Hi! This is Skyler's first game. Press Start. Use WSAD to control the player. Click "Show Log" to show the input log. Program can detect when the player is in the far-right position.</center></p>
+    
+    <div style= "position:absolute; left: 1300px; top: 100px" <p1 id="log"></p1> </div>
+    <input type="button" id="StartButton" onclick="hideButton()" style="font-size : 40px;" value="Start Game"></>
+    
+    <button id="ShowLog" onclick="showLog()">SHOW LOG</button>
+    </div>
+    <svg id="back" width="1280px" height="720px" class="area">
+    <rect id="player" x="10" y="10" width="20" height="20" fill="white"/>
+    </svg>
+    
+    </body>
+    <script type="text/javascript">
+    
+    function hideButton () {
+    let button = document.getElementById("StartButton").style.display = "none";
+    document.getElementById("player").style.visibility = "visible";
+    }
+    
+    
+    document.getElementById("player").style.visibility = "hidden";
+    document.getElementById("log").style.visibility = "hidden";
+    
+    function showLog() {
+    document.getElementById("log").style.visibility = "visible";
+    }
+        let moveRate = 40;
+        let position = {
+            x: 10,
+            y: 10
+        };
+    
+        document.addEventListener('keydown', (event) => {
+        var name = event.key;
+        var code = event.code;
+        if(event.keyCode == 87) {
+        document.getElementById("log").innerHTML = "W was pressed!"
+        updateYPosition(+moveRate);
+        }
+        else if(event.keyCode == 65) {
+        document.getElementById("log").innerHTML = "A was pressed!"
+        updateXPosition(-moveRate);
+        }
+        else if(event.keyCode == 83) {
+        document.getElementById("log").innerHTML = "S was pressed!"
+        updateYPosition(-moveRate);
+        }
+        else if(event.keyCode == 68) {
+        document.getElementById("log").innerHTML = "D was pressed!"
+        updateXPosition(+moveRate);
+        }
+        refreshPosition();
+        } , false);
+    
+        let Player = document.getElementById("player");
+    
+    
+    function updateYPosition(distance) {
+        position.y -= distance;
+        if(position.y < 0) {
+            position.y = 719;
+        }
+        else if(position.y > 719) {
+            position.y = 0;
+        }
+    }
+    
+    
+    
+    function updateXPosition(distance) {
+        position.x += distance;
+        if(position.x < 0) {
+            position.x = 1279;
+        }
+        else if(position.x > 1279) {
+            position.x = 0;
+        }
+            if(position.x > 1000) {
+            document.body.style.backgroundColor = "red";
+            }
+            else {
+            document.body.style.backgroundColor = "white";
+            }
+    }	
+    
+    
+    function refreshPosition() {
+        let x = position.x - (4);
+        let y = position.y - (4);
+        let transform = "translate(" + x + " " + y + ")";
+        player.setAttribute("transform", transform);
+    }
+    
+    </script>
+    </html>
