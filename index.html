@@ -1,6 +1,12 @@
 <html>
     <head>
-        <link rel="stylesheet" href="style.css">
+        <script src="script.js"></script>
+        <!--links to external style sheets-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="styleshet" href="style.css">
+        <!--jquery-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>        <link rel="stylesheet" href="style.css">
     </head>
     <body>
     <center><h1>Skyler Hall</h1>    <p>Amatuer Developer</p>
@@ -10,8 +16,12 @@
     <h2>About</h2>
     <img id="picture" src="https://yt3.ggpht.com/PmKCDVugLM2oedkbEhOIWktca342reGmLhqodp94ZYf3s66hDisx00R7AS605Fwn4SInbSzl=s176-c-k-c0x00ffffff-no-rj-mo">
     <p>First Game</p>
-    <iframe id="project1" src="project1.html"></iframe>
-        <button id="collapse" onclick="collapse()"> collapse </button>
+    <button type="button" data-toggle="collapse" data-target="#project1"> First html Game </button>
+    <div id="project1" class="collapse">
+        <iframe id="project1" src="project1.html"></iframe>
+    </div>
+
+
     <h2>Projects</h2>
     <p>Scuffed "Pong" Tennis</p>
     <iframe width=800 height= 300 src="https://editor.p5js.org/grayshirt_/full/F30brYOSH"></iframe>
