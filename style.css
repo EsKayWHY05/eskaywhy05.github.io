@@ -37,5 +37,5 @@ p1 {
 
 body {
     background-color: rgb(212, 212, 212);
-    overflow: hidden;
+    overflow-x: hidden;
 }
