@@ -23,11 +23,7 @@ h1 {
 
 #grayshirtLogo {
     position: absolute;
-<<<<<<< HEAD
-    z-index: -1;
-=======
     z-index: -2;
->>>>>>> b0ac28aa8ca0c4827e927708aa4c9481f83e98fe
     opacity: 10%;
     max-width: 100%;
     max-height: 100%;
@@ -41,12 +37,5 @@ p1 {
 
 body {
     background-color: rgb(212, 212, 212);
-<<<<<<< HEAD
-<<<<<<< HEAD
-    overflow: hidden;
-=======
->>>>>>> 08ef835a10def32bc912c7754e41faba199f156e
-=======
     overflow-x: hidden;
->>>>>>> b0ac28aa8ca0c4827e927708aa4c9481f83e98fe
 }
