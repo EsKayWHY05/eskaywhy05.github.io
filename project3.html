@@ -1,0 +1,174 @@
+<center><div id="scoreboard">SCORE</div></center>
+
+<center><canvas id="myCanvas"></canvas></center>
+<center><button id="startButton" onclick="start()">Start</button></center>
+
+
+
+<style type="text/css">
+#myCanvas {
+width: 600px;
+height: 600px;
+background-color: rgb(0, 60, 0);
+position: relative;
+}
+#scoreboard {
+font-size: 30px;
+}
+body {
+        background-color: white;
+    }
+</style>
+
+<body>
+<script type="text/javascript">
+
+
+var StartButton = document.getElementById("startButton");
+var ballButton = document.getElementById("ballSpawn");
+
+
+function start () {
+StartButton.style.display = 'none';
+setInterval(game, 12);
+}
+
+var canvas = document.getElementById("myCanvas");
+var ctx = canvas.getContext("2d");
+var paddleSpeed = 4;
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = canvas.width/2;
+var paddleY = canvas.height-20;
+var leftPressed = false;
+var rightPressed = false;
+var upPressed = false;
+var downPressed = false;
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+
+
+
+function keyDownHandler(d) {
+if(d.code == "KeyA") {
+leftPressed = true;
+}
+else if(d.code == "KeyD") {
+rightPressed = true;
+}
+else if(d.code == "KeyW") {
+upPressed = true;
+}
+else if(d.code == "KeyS") {
+downPressed = true;
+}
+}
+
+function keyUpHandler(u) {
+if(u.code == "KeyA") {
+leftPressed = false;
+}
+else if(u.code == "KeyD") {
+rightPressed = false;
+}
+else if(u.code == "KeyW") {
+upPressed = false;
+}
+else if(u.code == "KeyS") {
+downPressed = false;
+}
+}
+
+var scoreboard = document.getElementById("scoreboard");
+var score = 0;
+
+function game() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+drawPaddle()
+drawBall()
+
+if(ballY < 0) {
+movementY = -movementY;
+}
+if(ballY > canvas.height) {
+movementY = -movementY;
+}
+
+if(ballX > canvas.width) {
+movementX = -movementX;
+}
+if(ballX < 0) {
+movementX = -movementX;
+}
+
+if(ballX > paddleX && ballX < paddleX + paddleWidth && ballY == paddleY) {
+movementY = -movementY;
+if(blue == true) {
+blue = false;
+score++;
+scoreboard.innerHTML = score;
+}
+else {
+score++;
+scoreboard.innerHTML = score;
+blue = true;
+}
+}
+
+
+if(leftPressed && paddleX > 0) {
+paddleX -= paddleSpeed;
+}
+if(rightPressed && paddleX < canvas.width-20) {
+paddleX += paddleSpeed;
+}
+if(upPressed && paddleY > 0) {
+paddleY -= paddleSpeed;
+}
+if(downPressed && paddleY < canvas.height-10) {
+paddleY += paddleSpeed;
+}
+
+if(paddleX == 0) {
+paddleX = 0;
+}
+
+}
+
+var blue = false;
+
+function drawPaddle() {
+ctx.beginPath();
+ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+if(blue == false) {
+ctx.fillStyle = "#FFFFFF";
+ctx.fill();
+}
+else {
+ctx.fillStyle = "#ADD8E6";
+ctx.fill();
+}
+ctx.closePath();
+}
+
+var ballX = 50;
+var ballY = 50;
+var radius = 10;
+var movementX = 2;
+var movementY = -2;
+
+function drawBall() {
+ctx.beginPath();
+ctx.arc(ballX, ballY, radius, 0, Math.PI*2);
+ctx.fillStyle = "#FFFFFF";
+ctx.fill();
+ctx.closePath();
+ballX += movementX;
+ballY += movementY;
+}
+
+
+</script>
+</body>
+</html>
