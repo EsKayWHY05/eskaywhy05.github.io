@@ -1,2 +1,86 @@
-All entries into this form are saved into a Firebase database and the latest submitter's name is shown below the submit button
-<iframe src="https://editor.p5js.org/grayshirt_/full/D6xNWok8_"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.5.2/firebase.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    Name: <input type="text" id="name"/><br>
+    Age: <input type="text" id="age"/><br>
+    Fav Color: <input type="text" id="favColor"/><br>
+    <button onclick="submit()">submit</button>
+    <br> Latest Submitter: <p id="latest"></p>
+    <main>
+    </main>
+    <script>
+        let database;
+let entries;
+let latestName;
+
+function setup() {
+  noCanvas();
+  
+  const firebaseConfig = {
+    apiKey: "AIzaSyCK0UjkqQ1o39COY4XtXnP54aUah_HJLDk",
+    authDomain: "simple-form-entry.firebaseapp.com",
+    databaseURL: "https://simple-form-entry-default-rtdb.firebaseio.com",
+    projectId: "simple-form-entry",
+    storageBucket: "simple-form-entry.appspot.com",
+    messagingSenderId: "568329075424",
+    appId: "1:568329075424:web:060bd63630f557ccb76e85",
+    measurementId: "G-QKZ5T6GS1L"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  database = firebase.database();
+  entries = database.ref('entries');
+  
+  entries.on("value", gotData);
+}
+
+function gotData(data) {
+  let db = data.val();
+  //console.log(entire);
+  
+  let keys = Object.keys(db);
+  //console.log(keys);
+  let organizedDB = [];
+  for(let i = 0; i<keys.length; i++) {
+    let key = keys[i];
+    let form = db[key];
+    organizedDB.push(form);
+  }
+  console.log(organizedDB);
+latestName = organizedDB[organizedDB.length -1].name;
+}
+
+function submit() {
+//console.log("clicked button");
+  let name = document.getElementById("name").value; //don't want   object
+  //console.log(name);
+  let age = document.getElementById("age").value;
+  let favColor = document.getElementById("favColor").value;
+//console.log(name);
+//console.log(age);
+//console.log(favColor);
+
+  let data = {
+    name: name,
+    age: age,
+    favColor: favColor
+  }
+console.log(data);
+entries.push(data);
+      //text(organizedDB[organizedDB.length-1].name + "," + organizedDB[organizedDB.length-1].age +"," + organizedDB[organizedDB.length-1].color);
+}
+function draw() {
+  document.getElementById("latest").innerHTML = latestName;
+}
+    </script>
+  </body>
+</html>
