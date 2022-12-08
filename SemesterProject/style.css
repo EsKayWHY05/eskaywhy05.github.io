@@ -1,0 +1,20 @@
+body {
+    background-color: gray;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+.buttons {
+    border: none;
+    z-index: 1;
+    background-color: darkgray;
+}
+.buttons:hover {
+    background-color: lightgrey;
+}
+
+h1 {
+    font-family: Arial;
+}
+h2 {
+    font-family: Arial;
+}
